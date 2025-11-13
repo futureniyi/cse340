@@ -1,0 +1,13 @@
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+<% } else { res.redirect('/') } %>
+
+<p class="error-intro">
+    Looks like the server tripped over its own shoelaces. Give it a second to regain its dignity.
+</p>
+
+<div class="error-message">
+    <%- message %>
+</div>

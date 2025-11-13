@@ -80,7 +80,7 @@ nav {
 nav ul {
   list-style: none;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   margin: 0;
   padding: 0;
   justify-content: space-evenly;
@@ -98,6 +98,26 @@ nav li:hover {
   cursor: pointer;
 }
 
+#wrapper>ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    justify-content: space-evenly;
+}
+
+#wrapper>ul>li {
+    padding: 1rem 0.5rem;
+    color: #fff;
+    font-weight: 600;
+    transition: background-color 0.3s;
+  }
+
+#wrapper>ul>li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
 /* ======================================================
    Hero Section
 ====================================================== */
