@@ -319,6 +319,8 @@ footer {
     order: -1;
   }
 
+  /* Vehicle Details */
+
   .vehicle-detail {
     display: grid;
     grid-template-columns: 1fr 1fr;
