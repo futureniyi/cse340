@@ -58,6 +58,36 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build a single vehicle detail view
+* ************************************ */
+Util.buildVehicleDetail = async function(vehicle){
+  if(!vehicle){
+    return '<p class="notice">Sorry, that vehicle could not be found.</p>'
+  }
+
+  const price = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(vehicle.inv_price)
+  const miles = new Intl.NumberFormat('en-US').format(vehicle.inv_miles)
+
+  let detail = '<section class="vehicle-detail">'
+  detail += '<div class="vehicle-hero">'
+  detail += '<img src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + '" />'
+  detail += '</div>'
+  detail += '<div class="vehicle-meta">'
+  detail += '<h2>' + vehicle.inv_year + ' ' + vehicle.inv_make + ' ' + vehicle.inv_model + '</h2>'
+  detail += '<p class="vehicle-price"><strong>Price:</strong> ' + price + '</p>'
+  detail += '<p class="vehicle-mileage"><strong>Mileage:</strong> ' + miles + ' miles</p>'
+  detail += '<p class="vehicle-color"><strong>Color:</strong> ' + vehicle.inv_color + '</p>'
+  if (vehicle.classification_name) {
+    detail += '<p class="vehicle-category"><strong>Category:</strong> ' + vehicle.classification_name + '</p>'
+  }
+  detail += '<p class="vehicle-description">' + vehicle.inv_description + '</p>'
+  detail += '</div>'
+  detail += '</section>'
+
+  return detail
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
