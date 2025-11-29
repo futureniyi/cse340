@@ -239,6 +239,18 @@ figcaption {
   display: block;
 }
 
+/* ======================================================
+   Auth Forms
+====================================================== */
+.password-requirements {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background-color: #f5f5f5;
+  border-left: 4px solid var(--primary-color);
+  font-size: 0.9rem;
+  color: #222;
+}
+
 figure img {
   background-color: #483D8B;
   padding: 1rem;
@@ -453,7 +465,7 @@ ul.messages li.error {
 }
 
 #password-requirements {
-  color: var(--secondary-color);
+  color: var(--dark-color);
 }
 
 
@@ -503,4 +515,3 @@ ul.messages li.error {
   
 
 }
-

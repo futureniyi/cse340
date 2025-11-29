@@ -6,6 +6,7 @@ const accountsController = require("../controllers/accountsController")
 
 // Route to build "My Account" login view (path after "account")
 router.get("/login", utilities.handleErrors(accountsController.buildLogin))
+// router.post("/login", utilities.handleErrors(accountsController.loginAccount))
 
 // Route to build registration view
 router.get("/register", utilities.handleErrors(accountsController.buildRegister))
