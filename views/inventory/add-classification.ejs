@@ -1,0 +1,33 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+  <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+  <%  }) %>
+  </ul>
+<% } %>
+
+<section class="auth-form">
+  <form action="/inv/add-classification" method="post">
+    <fieldset>
+      <legend>Add a new classification</legend>
+      <p class="form-help">Classification names cannot contain spaces or special characters.</p>
+      <label for="classification_name">Classification Name</label>
+      <input
+        type="text"
+        id="classification_name"
+        name="classification_name"
+        value="<%= locals.classification_name %>"
+        pattern="^[A-Za-z0-9]+$"
+        required
+        aria-describedby="classification-help"
+      >
+      <small id="classification-help">Use letters and numbers only; no spaces.</small>
+      <button type="submit">Add Classification</button>
+    </fieldset>
+  </form>
+</section>
