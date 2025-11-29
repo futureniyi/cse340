@@ -5,7 +5,7 @@
 <%- messages() %>
 
 <section class="auth-form">
-  <form action="/account/register" method="post" novalidate>
+  <form action="/account/register" method="post">
     <fieldset>
       <legend>Create an account</legend>
       <label for="account_firstname">First Name</label>
@@ -18,7 +18,7 @@
       <input type="email" id="account_email" name="account_email" value="<%= typeof account_email != 'undefined' ? account_email : '' %>" required>
 
       <label for="account_password">Password</label>
-      <input type="password" id="account_password" name="account_password" pattern="(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{12,}" aria-describedby="password-requirements" required>
+      <input type="password" id="account_password" name="account_password" aria-describedby="password-requirements" required>
       <small id="password-requirements">At least 12 characters, with 1 uppercase letter, 1 number, and 1 special character.</small>
 
       <button type="submit">Register</button>
