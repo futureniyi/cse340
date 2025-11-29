@@ -3,14 +3,21 @@
 <% } else { res.redirect('/') } %>
 
 <%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+  <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+  <%  }) %>
+  </ul>
+<% } %>
 
 <section class="auth-form">
-<form action="/account/login" method="post">
+<form id="loginForm" action="/account/login" method="post">
   <fieldset>
     <legend>Sign in to your account</legend>
 
     <label for="account_email">Email</label>
-    <input type="email" id="account_email" name="account_email" required>
+    <input type="email" id="account_email" name="account_email" value="<%= locals.account_email %>" required>
 
     <label for="account_password">Password</label>
     <div id="password-requirements" class="password-requirements">
