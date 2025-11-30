@@ -1,6 +1,10 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
 
+// Default vehicle imagery used when inventory records do not include image paths
+const PLACEHOLDER_IMAGE = "/images/vehicles/no-image.png"
+const PLACEHOLDER_THUMB = "/images/vehicles/no-image-tn.png"
+
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -33,12 +37,13 @@ Util.buildClassificationGrid = async function(data){
   if(data.length > 0){
     grid = '<ul id="inv-display">'
     data.forEach(vehicle => { 
+      const thumbnailSrc = vehicle.inv_thumbnail || PLACEHOLDER_THUMB
       grid += '<li>'
       grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail 
+      + 'details"><img src="' + thumbnailSrc 
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a>'
+      +' on CSE Motors" onerror="this.onerror=null;this.src=\'' + PLACEHOLDER_THUMB + '\';" /></a>'
       grid += '<div class="namePrice">'
       grid += '<hr />'
       grid += '<h2>'
@@ -87,10 +92,11 @@ Util.buildVehicleDetail = async function(vehicle){
 
   const price = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(vehicle.inv_price)
   const miles = new Intl.NumberFormat('en-US').format(vehicle.inv_miles)
+  const imageSrc = vehicle.inv_image || PLACEHOLDER_IMAGE
 
   let detail = '<section class="vehicle-detail">'
   detail += '<div class="vehicle-hero">'
-  detail += '<img src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + '" />'
+  detail += '<img src="' + imageSrc + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + '" onerror="this.onerror=null;this.src=\'' + PLACEHOLDER_IMAGE + '\';" />'
   detail += '</div>'
   detail += '<div class="vehicle-meta">'
   detail += '<h2>' + vehicle.inv_year + ' ' + vehicle.inv_make + ' ' + vehicle.inv_model + '</h2>'
