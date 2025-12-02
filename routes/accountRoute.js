@@ -5,13 +5,16 @@ const utilities = require("../utilities")
 const accountsController = require("../controllers/accountsController")
 const regValidate = require('../utilities/account-validation')
 
+// Default account management view
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountsController.buildAccountManagement))
+
 // Route to build "My Account" login view (path after "account")
 router.get("/login", utilities.handleErrors(accountsController.buildLogin))
 router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
-  utilities.handleErrors(accountsController.loginAccount)
+  utilities.handleErrors(accountsController.accountLogin)
 )
 
 // Route to build registration view

@@ -14,6 +14,12 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 // Route to build vehicle detail view
 router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvId))
 
+// Route to return inventory by classification as JSON
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// Route to show edit inventory view
+router.get("/edit/:invId", utilities.handleErrors(invController.buildEditInventory))
+
 // Route to show add classification view
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
 

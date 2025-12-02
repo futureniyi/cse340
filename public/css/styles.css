@@ -109,6 +109,7 @@ nav li:hover {
     margin: 0;
     padding: 0;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 #wrapper>ul>li {
@@ -426,20 +427,6 @@ footer {
 }
 /* Submit button */
 .auth-form button[type="submit"] {
-  /* width: 100%;
-  padding: 0.75rem 1rem;
-  border-radius: 999px;
-  border: none;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  cursor: pointer;
-  background: linear-gradient(135deg, #3ab0ff, #2ecc71);
-  color: #06101d;
-  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.15s ease;
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.4);
-  margin-top: 1rem; */
     border: none;
     background-image: linear-gradient(var(--primary-color), #312774);
     color: #fff;
@@ -511,6 +498,86 @@ ul.messages li.error {
   color: var(--dark-color);
 }
 
+#classificationList {
+  /* background-color: #eee; */
+  display: block;
+  border: solid 1px var(--primary-color);
+  border-radius: 6px;
+  padding: .75rem;
+  color: var(--primary-color);
+  /* width: 100%; */
+  max-width: 100%;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Inventory table container */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; */
+  font-size: 0.95rem;
+}
+
+/* Header row */
+#inventoryDisplay thead {
+  background-color: #1f2937;
+  /* dark gray */
+  color: #ffffff;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+/* Zebra striping for body rows */
+#inventoryDisplay tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+/* Hover effect */
+#inventoryDisplay tbody tr:hover {
+  background-color: #e5f0ff;
+}
+
+/* First column: vehicle name */
+#inventoryDisplay tbody td:first-child {
+  font-weight: 600;
+}
+
+/* Action links as buttons */
+#inventoryDisplay a {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Modify link */
+#inventoryDisplay a[title*="update"] {
+  background-color: #001fb8;
+  color: #ffffff;
+}
+
+#inventoryDisplay a[title*="update"]:hover {
+  background-color: #0c30e4;
+}
+
+/* Delete link */
+#inventoryDisplay a[title*="delete"] {
+  background-color: #920707;
+  color: #ffffff;
+}
+
+#inventoryDisplay a[title*="delete"]:hover {
+  background-color: #b10606;
+}
 
 /* ======================================================
    Responsive Design
@@ -555,6 +622,10 @@ ul.messages li.error {
     padding: 1.75rem 1.5rem 1.5rem;
   }
 
-  
+  #inventoryDisplay th,
+  #inventoryDisplay td {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.85rem;
+  }
 
 }
