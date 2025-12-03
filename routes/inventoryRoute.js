@@ -6,7 +6,7 @@ const utilities = require("../utilities/")
 const invValidate = require("../utilities/inventory-validation")
 
 // Route to build inventory management view
-router.get("/", utilities.handleErrors(invController.buildManagement))
+router.get("/", utilities.checkEmployeeAdmin, utilities.handleErrors(invController.buildManagement))
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId))
@@ -15,28 +15,30 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvId))
 
 // Route to return inventory by classification as JSON
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+router.get("/getInventory/:classification_id", utilities.checkEmployeeAdmin, utilities.handleErrors(invController.getInventoryJSON))
 
 // Route to show edit inventory view
-router.get("/edit/:invId", utilities.handleErrors(invController.buildEditInventory))
+router.get("/edit/:invId", utilities.checkEmployeeAdmin, utilities.handleErrors(invController.buildEditInventory))
 
 // Route to show delete inventory confirmation view
-router.get("/delete/:invId", utilities.handleErrors(invController.buildDeleteInventory))
+router.get("/delete/:invId", utilities.checkEmployeeAdmin, utilities.handleErrors(invController.buildDeleteInventory))
 
 // Route to show add classification view
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
+router.get("/add-classification", utilities.checkEmployeeAdmin, utilities.handleErrors(invController.buildAddClassification))
 
 // Process new classification
 router.post(
   "/add-classification",
   invValidate.classificationRules(),
   invValidate.checkClassData,
+  utilities.checkEmployeeAdmin,
   utilities.handleErrors(invController.addClassification)
 )
 
 // Route to show add inventory view
 router.get(
   "/add-inventory",
+  utilities.checkEmployeeAdmin,
   utilities.handleErrors(invController.buildAddInventory)
 )
 
@@ -45,6 +47,7 @@ router.post(
   "/add-inventory",
   invValidate.inventoryRules(),
   invValidate.checkInventoryData,
+  utilities.checkEmployeeAdmin,
   utilities.handleErrors(invController.addInventory)
 )
 
@@ -53,10 +56,11 @@ router.post(
   "/update",
   invValidate.inventoryRules(),
   invValidate.checkUpdateData,
+  utilities.checkEmployeeAdmin,
   utilities.handleErrors(invController.updateInventory)
 )
 
 // Process inventory delete
-router.post("/delete", utilities.handleErrors(invController.deleteInventory))
+router.post("/delete", utilities.checkEmployeeAdmin, utilities.handleErrors(invController.deleteInventory))
 
 module.exports = router;
