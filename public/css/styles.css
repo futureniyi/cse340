@@ -593,6 +593,13 @@ button[type="submit"]:not(:disabled):hover {
   background-color: #1d4ed8;
 }
 
+#tools {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-left: 1rem;
+}
+
 /* ======================================================
    Responsive Design
 ====================================================== */
@@ -640,6 +647,10 @@ button[type="submit"]:not(:disabled):hover {
   #inventoryDisplay td {
     padding: 0.5rem 0.6rem;
     font-size: 0.85rem;
+  }
+
+  #tools {
+    grid-template-columns: 1fr 1fr;
   }
 
 }
