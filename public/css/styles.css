@@ -355,7 +355,7 @@ footer {
 /* Auth card */
 .auth-form {
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   margin: 1rem;
   padding: 2rem 1.5rem;
   border-radius: 8px;
@@ -600,6 +600,27 @@ button[type="submit"]:not(:disabled):hover {
   margin-left: 1rem;
 }
 
+
+
+.review-list .inline-form button[type="submit"] {
+  color: #eee;
+  padding: .8rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-color);
+}
+
+.review-list .inline-form button[type="submit"]:hover {
+  /* filter: brightness(1.05);
+  transform: translateY(-1px); */
+  background: #c0392b;
+}
+
+.review-list .inline-form button[type="submit"]:active {
+  /* transform: translateY(0);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); */
+  background: #e74c3c;
+}
 /* ======================================================
    Responsive Design
 ====================================================== */
