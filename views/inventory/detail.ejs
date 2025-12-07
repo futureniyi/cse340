@@ -4,3 +4,52 @@
 
 <%# Vehicle detail content %>
 <%- detail %>
+
+<section class="vehicle-reviews">
+  <h2>Reviews</h2>
+  <% if (ratingSummary) { %>
+    <p>Average rating: <strong><%= ratingSummary.average_rating %></strong> (<%= ratingSummary.review_count %> review<%= ratingSummary.review_count == 1 ? '' : 's' %>)</p>
+  <% } %>
+
+  <% if (locals.loggedin) { %>
+    <form action="/inv/review" method="post" class="auth-form">
+      <fieldset>
+        <legend><%= userReview ? "Update your review" : "Add a review" %></legend>
+        <label for="rating">Rating (1-5)</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" required value="<%= userReview ? userReview.rating : '' %>">
+
+        <label for="comment">Comment</label>
+        <textarea id="comment" name="comment" required minlength="2" maxlength="1000"><%= userReview ? userReview.comment : '' %></textarea>
+
+        <input type="hidden" name="inv_id" value="<%= invId %>">
+        <button type="submit"><%= userReview ? "Update Review" : "Submit Review" %></button>
+      </fieldset>
+    </form>
+  <% } else { %>
+    <p><a href="/account/login">Log in</a> to leave a review.</p>
+  <% } %>
+
+  <% if (reviews && reviews.length > 0) { %>
+    <ul class="review-list">
+      <% reviews.forEach(function(review) { %>
+        <li class="review-item">
+          <div class="review-header">
+            <strong><%= review.account_firstname %> <%= review.account_lastname %></strong>
+            <span>Rating: <%= review.rating %>/5</span>
+            <span><%= new Date(review.created_at).toLocaleString() %></span>
+          </div>
+          <p><%= review.comment %></p>
+          <% if (locals.loggedin && (review.account_id === locals.accountData.account_id || ["Employee","Admin"].includes(locals.accountData.account_type))) { %>
+            <form action="/inv/review/delete" method="post" class="inline-form">
+              <input type="hidden" name="review_id" value="<%= review.review_id %>">
+              <input type="hidden" name="inv_id" value="<%= review.inv_id %>">
+              <button type="submit">Delete</button>
+            </form>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No reviews yet. Be the first to review this vehicle.</p>
+  <% } %>
+</section>

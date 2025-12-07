@@ -2,8 +2,10 @@
 const express = require("express")
 const router = new express.Router() 
 const invController = require("../controllers/invController")
+const reviewController = require("../controllers/reviewController")
 const utilities = require("../utilities/")
 const invValidate = require("../utilities/inventory-validation")
+const reviewValidate = require("../utilities/review-validation")
 
 // Route to build inventory management view
 router.get("/", utilities.checkEmployeeAdmin, utilities.handleErrors(invController.buildManagement))
@@ -13,6 +15,20 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 
 // Route to build vehicle detail view
 router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvId))
+
+// Review routes
+router.post(
+  "/review",
+  utilities.checkLogin,
+  reviewValidate.reviewRules(),
+  reviewValidate.checkReviewData,
+  utilities.handleErrors(reviewController.submitReview)
+)
+router.post(
+  "/review/delete",
+  utilities.checkLogin,
+  utilities.handleErrors(reviewController.deleteReview)
+)
 
 // Route to return inventory by classification as JSON
 router.get("/getInventory/:classification_id", utilities.checkEmployeeAdmin, utilities.handleErrors(invController.getInventoryJSON))

@@ -180,10 +180,21 @@ invCont.buildByInvId = async function (req, res, next) {
   }
   const vehicleName = `${data.inv_make} ${data.inv_model}`
   const detail = await utilities.buildVehicleDetail(data)
+  // Reviews and rating summary
+  const reviewModel = require("../models/review-model")
+  const reviews = await reviewModel.getReviewsByInvId(invId)
+  const ratingSummary = await reviewModel.getRatingSummaryByInvId(invId)
+  const userReview = res.locals.accountData
+    ? await reviewModel.getReviewByUserAndInv(res.locals.accountData.account_id, invId)
+    : null
   res.render("./inventory/detail", {
     title: `${data.inv_year} ${vehicleName}`,
     nav,
     detail,
+    reviews,
+    ratingSummary,
+    userReview,
+    invId,
   })
 }
 
